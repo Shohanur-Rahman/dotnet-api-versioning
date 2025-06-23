@@ -1,0 +1,6 @@
+@My.ApiVersioningExample.WebApi_HostAddress = http://localhost:5016
+
+GET {{My.ApiVersioningExample.WebApi_HostAddress}}/Users/
+Accept: application/json
+
+###
