@@ -16,7 +16,7 @@ namespace My.ApiVersioningExample.WebApi.Controllers.Users
 	/// <remarks>
 	/// This controller is protected by authorization and is routed using the controller name (e.g., 'users').
 	/// </remarks>
-	[Route("[controller]")]
+	[Route("api/[controller]")]
 	[ApiController]
 	[Authorize]
 	public class UsersController : ControllerBase
