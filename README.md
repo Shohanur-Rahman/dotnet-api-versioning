@@ -6,22 +6,35 @@ This project is a RESTful CRUD API for managing users, built with **.NET 9**. It
 
 ### Key Features
 
-- **Create, Read, Update, Delete (CRUD)** operations for User entities.
-- Strongly-typed requests and responses with models such as `UserCreateRequest`, `UserUpdateRequest`, and `UserDetailResponse`.
-- File upload support for updating user profile photos using a dedicated `FileUploadService`.
-- Detailed API response handling with HTTP status codes and meaningful error messages.
-- Dependency injection for service management, including logging and user business logic separation (`IUserService`).
-- Exception handling and logging integrated in controller actions.
-- Uses MS SQL via EF Core for persistent storage.
-- Designed with scalability and maintainability in mind using clean architecture principles.
+- **API Versioning:** Supports multiple API versions (e.g., `v1`, `v2`), enabling backward compatibility and iterative improvements.
+- **Clean Code & Standard Architecture:** Designed using clean code principles and a standard layered architecture for maintainability, testability, and scalability.
+- **OpenAPI Documentation:** Fully integrated OpenAPI (Swagger) support to provide interactive API documentation and ease of exploration.
+- **CRUD operations:** Create, Read, Update, and Delete users with well-defined request and response models.
+- **File Upload Support:** Upload and update user profile photos using a dedicated `FileUploadService`.
+- **Strongly-Typed Responses:** Uses generic `ApiResponse<T>` wrappers to standardize API responses with success, error messages, and HTTP status codes.
+- **Dependency Injection & Logging:** Utilizes built-in .NET dependency injection for service management and integrated logging for monitoring and troubleshooting.
+- **EF Core with MS SQL:** Entity Framework Core with Microsoft SQL Server backend for efficient and reliable data persistence.
+- **Scalar API Integration:** Includes support for scalar API calls for specialized data operations (add details here if needed).
+
   
 ### Technologies Used
 
 - **.NET 9** (ASP.NET Core Web API)
-- **Entity Framework Core** for ORM
-- **Microsoft SQL Server** (MS SQL) as the database
-- **Scalar API** for specialized data interactions (please specify the scalar API details here if needed)
-- Built-in **Dependency Injection** and **Logging**
+- **Entity Framework Core** (EF Core)
+- **Microsoft SQL Server** (MS SQL)
+- **API Versioning** (Microsoft.AspNetCore.Mvc.Versioning)
+- **OpenAPI / Swagger** for API documentation
+- **Dependency Injection & Logging** (built into .NET)
+- **Scalar API** for custom data operations
+
+### API Versioning
+
+The API is versioned to allow multiple iterations to coexist:
+
+- `api/v1/users` - Version 1 endpoints
+- `api/v2/users` - Version 2 endpoints with potential enhancements
+
+This enables smooth upgrades and client compatibility management.
 
 ### API Endpoints
 
@@ -36,9 +49,10 @@ This project is a RESTful CRUD API for managing users, built with **.NET 9**. It
 
 ### Usage
 
-- Send requests to the respective endpoints with appropriate payloads.
-- Profile photos can be updated by uploading a file through multipart/form-data in the `photo-update` endpoint.
-- The API responds with standardized `ApiResponse<T>` objects to simplify client-side error handling.
+- Use the versioned routes to access the API endpoints.
+- Profile photos are updated by sending a multipart/form-data request to the photo update endpoint.
+- All responses are wrapped in the `ApiResponse<T>` format for consistency.
+- Explore the API via the integrated Scalar UI available at `/scalar` endpoint.
 
 ---
 
