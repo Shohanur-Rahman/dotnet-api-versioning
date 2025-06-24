@@ -1,9 +1,9 @@
-﻿namespace My.ApiVersioningExample.Core.Users.DTOs.Response
+﻿namespace My.ApiVersioningExample.Core.Security.Response
 {
 	/// <summary>
-	/// This class is responsible for user information response
+	/// This class is responsible for authentication information
 	/// </summary>
-	public class UserDetailResponse
+	public class AuthResponse
 	{
 		#region Properties
 

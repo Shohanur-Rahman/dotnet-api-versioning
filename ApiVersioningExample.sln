@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "My.ApiVersioningExample.Ser
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "My.ApiVersioningExample.WebApi", "src\My.ApiVersioningExample.WebApi\My.ApiVersioningExample.WebApi.csproj", "{4481FD2E-ADB5-414A-BBC2-EDFDDE79A030}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "My.ApiVersioningExample.Data.Tests", "src\My.ApiVersioningExample.Data.Tests\My.ApiVersioningExample.Data.Tests.csproj", "{E22AA039-60D5-47EC-886D-E52A3E3AC6E4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "My.ApiVersioningExample.Services.Tests", "src\My.ApiVersioningExample.Services.Tests\My.ApiVersioningExample.Services.Tests.csproj", "{B9BA1A4E-773B-4F48-9EE1-0BD0A0CF968E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,14 @@ Global
 		{4481FD2E-ADB5-414A-BBC2-EDFDDE79A030}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4481FD2E-ADB5-414A-BBC2-EDFDDE79A030}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4481FD2E-ADB5-414A-BBC2-EDFDDE79A030}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E22AA039-60D5-47EC-886D-E52A3E3AC6E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E22AA039-60D5-47EC-886D-E52A3E3AC6E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E22AA039-60D5-47EC-886D-E52A3E3AC6E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E22AA039-60D5-47EC-886D-E52A3E3AC6E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B9BA1A4E-773B-4F48-9EE1-0BD0A0CF968E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9BA1A4E-773B-4F48-9EE1-0BD0A0CF968E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9BA1A4E-773B-4F48-9EE1-0BD0A0CF968E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9BA1A4E-773B-4F48-9EE1-0BD0A0CF968E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

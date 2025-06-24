@@ -16,7 +16,7 @@ namespace My.ApiVersioningExample.Core.Users.Entities
 		/// <summary>
 		/// Gets or sets the full name of the user.
 		/// </summary>
-		[Required, MaxLength(100)]
+		//[Required, MaxLength(100)]
 		public string Name { get; set; } = default!;
 
 		/// <summary>
@@ -28,7 +28,7 @@ namespace My.ApiVersioningExample.Core.Users.Entities
 		/// <summary>
 		/// Gets or sets the user's mobile phone number.
 		/// </summary>
-		[Required, MaxLength(20)]
+		//[Required, MaxLength(20)]
 		public string? Mobile { get; set; } = default!;
 
 		/// <summary>

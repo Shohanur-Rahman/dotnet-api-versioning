@@ -151,5 +151,4 @@ namespace My.ApiVersioningExample.Services.Users
 		#endregion
 	}
 
-
 }

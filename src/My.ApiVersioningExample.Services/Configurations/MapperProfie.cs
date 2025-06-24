@@ -1,5 +1,7 @@
 ﻿
 using AutoMapper;
+using My.ApiVersioningExample.Core.Security.Request;
+using My.ApiVersioningExample.Core.Security.Response;
 using My.ApiVersioningExample.Core.Users.DTOs.Request;
 using My.ApiVersioningExample.Core.Users.DTOs.Response;
 using My.ApiVersioningExample.Core.Users.Entities;
@@ -26,6 +28,10 @@ namespace My.ApiVersioningExample.Services.Configurations
 				.ReverseMap();
 			CreateMap<PhotoUrlRequest, DbUser>().ReverseMap();
 			CreateMap<UserDetailResponse, DbUser>().ReverseMap();
+
+
+			CreateMap<SignUpRequest, DbUser>().ReverseMap();
+			CreateMap<AuthResponse, DbUser>().ReverseMap();
 
 			#endregion
 		}

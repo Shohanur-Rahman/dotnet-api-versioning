@@ -1,5 +1,4 @@
-﻿using Azure.Core;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using My.ApiVersioningExample.Common.Enums.File;
 using My.ApiVersioningExample.Common.Responses;
@@ -8,10 +7,18 @@ using My.ApiVersioningExample.Core.Users.DTOs.Response;
 using My.ApiVersioningExample.Services.Users.Interfaces;
 using My.ApiVersioningExample.WebApi.Urilities;
 
-namespace My.ApiVersioningExample.WebApi.Controllers
+namespace My.ApiVersioningExample.WebApi.Controllers.Users
 {
+
+	/// <summary>
+	/// API controller responsible for managing user-related operations such as profile management, file uploads, and other user-specific actions.
+	/// </summary>
+	/// <remarks>
+	/// This controller is protected by authorization and is routed using the controller name (e.g., 'users').
+	/// </remarks>
 	[Route("[controller]")]
 	[ApiController]
+	[Authorize]
 	public class UsersController : ControllerBase
 	{
 		#region Properties and Variables
@@ -24,12 +31,19 @@ namespace My.ApiVersioningExample.WebApi.Controllers
 
 		#region Constructors
 
+		/// <summary>
+		/// Initializes a new instance of the <see cref="UsersController"/> class with the specified services.
+		/// </summary>
+		/// <param name="userService">Service for handling user-related business logic.</param>
+		/// <param name="logger">Logger instance for logging user controller activity.</param>
+		/// <param name="fileUploadService">Service for handling file uploads.</param>
 		public UsersController(IUserService userService, ILogger<UsersController> logger, FileUploadService fileUploadService)
 		{
 			_logger = logger;
 			_userService = userService;
 			_fileUploadService = fileUploadService;
 		}
+
 		#endregion
 
 		#region Public Endpoints
@@ -140,7 +154,7 @@ namespace My.ApiVersioningExample.WebApi.Controllers
 				var result = await _userService.AddUserAsync(request);
 
 				if (result is null)
-					return BadRequest(ApiResponse<UserDetailResponse>.Fail($"User create request fail with provided values"));
+					return BadRequest(ApiResponse<UserDetailResponse>.Fail($"User create request failed with provided values"));
 
 				return Ok(ApiResponse<UserDetailResponse>.Ok(result, "User created successfully"));
 			}
@@ -184,7 +198,7 @@ namespace My.ApiVersioningExample.WebApi.Controllers
 				var result = await _userService.UpdateUserAsync(request);
 
 				if (result is null)
-					return BadRequest(ApiResponse<UserDetailResponse>.Fail($"User update request fail with provided values"));
+					return BadRequest(ApiResponse<UserDetailResponse>.Fail($"User update request failed with provided values"));
 
 				return Ok(ApiResponse<UserDetailResponse>.Ok(result, "User updated successfully"));
 			}
@@ -243,7 +257,7 @@ namespace My.ApiVersioningExample.WebApi.Controllers
 				var result = await _userService.PhotoUrlUpdateAsync(photoUrlRequest);
 
 				if (result is null)
-					return BadRequest(ApiResponse<UserDetailResponse>.Fail($"User update request fail with provided values"));
+					return BadRequest(ApiResponse<UserDetailResponse>.Fail($"User update request failed with provided values"));
 
 				return Ok(ApiResponse<UserDetailResponse>.Ok(result, "Photo updated successfully"));
 			}
@@ -287,7 +301,7 @@ namespace My.ApiVersioningExample.WebApi.Controllers
 				var result = await _userService.DeleteUserAsync(id);
 
 				if (!result)
-					return BadRequest(ApiResponse<UserDetailResponse>.Fail($"User delete request fail with id {id}"));
+					return BadRequest(ApiResponse<UserDetailResponse>.Fail($"User delete request failed with id {id}"));
 
 				return Ok(ApiResponse<bool>.Ok(result, "User deleted successfully"));
 			}

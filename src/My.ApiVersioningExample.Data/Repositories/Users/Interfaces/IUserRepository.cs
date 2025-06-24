@@ -21,6 +21,15 @@ namespace My.ApiVersioningExample.Data.Repositories.Users.Interfaces
 		Task<DbUser?> GetUserByIdAsync(Guid id);
 
 		/// <summary>
+		/// Asynchronously retrieves a user from the database by their email address.
+		/// </summary>
+		/// <param name="email">The email address of the user to retrieve.</param>
+		/// <returns>
+		/// A <see cref="DbUser"/> instance if a user with the specified email exists; otherwise, <c>null</c>.
+		/// </returns>
+		Task<DbUser?> GetUserByEmailAsync(string email);
+
+		/// <summary>
 		/// Adds a new user to the database.
 		/// </summary>
 		/// <param name="request">The user creation request containing user data.</param>

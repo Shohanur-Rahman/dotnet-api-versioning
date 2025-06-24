@@ -54,6 +54,23 @@ namespace My.ApiVersioningExample.Data.Repositories.Users
 		}
 
 		/// <summary>
+		/// Asynchronously retrieves a user from the database by their email address.
+		/// </summary>
+		/// <param name="email">The email address of the user to retrieve.</param>
+		/// <returns>
+		/// A <see cref="DbUser"/> instance if a user with the specified email exists; otherwise, <c>null</c>.
+		/// </returns>
+		/// <exception cref="ArgumentException">Thrown when the provided email is null or empty.</exception>
+		public async Task<DbUser?> GetUserByEmailAsync(string email)
+		{
+			if (string.IsNullOrEmpty(email))
+				throw new ArgumentException("User email cannot be empty.", nameof(email));
+
+			return await _dbContext.Users.SingleOrDefaultAsync(u => u.Email == email);
+		}
+
+
+		/// <summary>
 		/// Adds a new user to the database.
 		/// </summary>
 		/// <param name="user">The request containing user creation data.</param>
@@ -62,7 +79,7 @@ namespace My.ApiVersioningExample.Data.Repositories.Users
 		public async Task<DbUser?> AddUserAsync(DbUser user)
 		{
 			if (user is null)
-				throw new ArgumentNullException($"User information cannot be null {nameof(user)}");
+				throw new ArgumentNullException($"User create request cannot be null {nameof(user)}");
 
 			await _dbContext.Users.AddAsync(user);
 			await _dbContext.SaveChangesAsync();

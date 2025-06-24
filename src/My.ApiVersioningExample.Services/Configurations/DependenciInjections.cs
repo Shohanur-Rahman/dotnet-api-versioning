@@ -1,4 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using My.ApiVersioningExample.Services.Security;
+using My.ApiVersioningExample.Services.Security.Interfaces;
 using My.ApiVersioningExample.Services.Users;
 using My.ApiVersioningExample.Services.Users.Interfaces;
 
@@ -25,6 +27,7 @@ namespace My.ApiVersioningExample.Services.Configurations
 			#region User Defined Services
 
 			services.AddScoped<IUserService, UserService>();
+			services.AddScoped<IAuthService, AuthService>();
 
 			#endregion
 
