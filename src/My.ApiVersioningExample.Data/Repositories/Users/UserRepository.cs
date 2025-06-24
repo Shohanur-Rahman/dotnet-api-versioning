@@ -81,12 +81,7 @@ namespace My.ApiVersioningExample.Data.Repositories.Users
 			if (user is null)
 				throw new ArgumentNullException($"User information cannot be null {nameof(user)}");
 
-			var userInfo = await _dbContext.Users.FirstOrDefaultAsync(x => x.Id == user.Id);
-
-			if (userInfo is null)
-				throw new KeyNotFoundException($"Data with ID {user.Id} was not found.");
-
-			_dbContext.Users.Update(userInfo);
+			_dbContext.Users.Update(user);
 			await _dbContext.SaveChangesAsync();
 			return await GetUserByIdAsync(user.Id);
 		}

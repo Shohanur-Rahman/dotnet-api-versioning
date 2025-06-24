@@ -22,10 +22,10 @@ namespace My.ApiVersioningExample.Core.Users.DTOs.Request
 		public string Email { get; set; } = default!;
 
 		/// <summary>
-		/// Gets or sets the mobile phone number of the user (optional).
+		/// Gets or sets the mobile phone number of the user.
 		/// </summary>
-		[MaxLength(20)]
-		public string? Mobile { get; set; }
+		[Required, MaxLength(20)]
+		public string Mobile { get; set; } = default!;
 
 		#endregion
 	}

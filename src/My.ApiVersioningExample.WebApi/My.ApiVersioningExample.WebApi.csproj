@@ -26,4 +26,8 @@
     <ProjectReference Include="..\My.ApiVersioningExample.Services\My.ApiVersioningExample.Services.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+
 </Project>

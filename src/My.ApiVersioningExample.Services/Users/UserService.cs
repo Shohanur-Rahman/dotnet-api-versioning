@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using My.ApiVersioningExample.Common.Helper;
 using My.ApiVersioningExample.Core.Users.DTOs.Request;
 using My.ApiVersioningExample.Core.Users.DTOs.Response;
 using My.ApiVersioningExample.Core.Users.Entities;
@@ -51,8 +52,12 @@ namespace My.ApiVersioningExample.Services.Users
 		/// </summary>
 		/// <param name="id">The unique identifier of the user.</param>
 		/// <returns>The detailed user response if found; otherwise, null.</returns>
+		/// <exception cref="ArgumentException">Thrown when the provided ID is empty.</exception>
 		public async Task<UserDetailResponse> GetUserByIdAsync(Guid id)
 		{
+			if (id == Guid.Empty)
+				throw new ArgumentException("User ID cannot be empty.", nameof(id));
+
 			var result = await _userRepository.GetUserByIdAsync(id);
 			return _mapper.Map<UserDetailResponse>(result);
 		}
@@ -69,7 +74,15 @@ namespace My.ApiVersioningExample.Services.Users
 				throw new ArgumentNullException($"User information cannot be null {nameof(request)}");
 
 			DbUser user = _mapper.Map<DbUser>(request);
+
+			//Create has and salt password
+			PasswordHelper.CreatePasswordHash(request.Password, out var passwordHash, out var passwordSalt);
+
+			user.PasswordSalt = passwordSalt;
+			user.PasswordHash = passwordHash;
+
 			var result = await _userRepository.AddUserAsync(user);
+
 			return _mapper.Map<UserDetailResponse>(result);
 		}
 
@@ -84,10 +97,43 @@ namespace My.ApiVersioningExample.Services.Users
 			if (request is null)
 				throw new ArgumentNullException($"User information cannot be null {nameof(request)}");
 
-			DbUser user = _mapper.Map<DbUser>(request);
-			var result = await _userRepository.UpdateUserAsync(user);
+			var userInfo = await _userRepository.GetUserByIdAsync(request.Id);
+
+			if (userInfo is null)
+				throw new KeyNotFoundException($"User with ID {request.Id} was not found.");
+
+			_mapper.Map(request, userInfo);
+			var result = await _userRepository.UpdateUserAsync(userInfo);
 			return _mapper.Map<UserDetailResponse>(result);
 		}
+
+
+		/// <summary>
+		/// Updates the user's profile photo URL based on the provided request.
+		/// </summary>
+		/// <param name="request">The request containing the user's ID and the new photo URL.</param>
+		/// <returns>A <see cref="UserDetailResponse"/> containing the updated user details.</returns>
+		/// <exception cref="ArgumentNullException">
+		/// Thrown when the request is null or the photo URL is null or empty.
+		/// </exception>
+		public async Task<UserDetailResponse> PhotoUrlUpdateAsync(PhotoUrlRequest request)
+		{
+			if (request is null)
+				throw new ArgumentNullException($"User information cannot be null {nameof(request)}");
+
+			if (string.IsNullOrEmpty(request.PhotoUrl))
+				throw new ArgumentNullException($"User photo url cannot be empty");
+
+			var userInfo = await _userRepository.GetUserByIdAsync(request.Id);
+
+			if (userInfo is null)
+				throw new KeyNotFoundException($"User with ID {request.Id} was not found.");
+
+			userInfo.PhotoUrl = request.PhotoUrl;
+			var result = await _userRepository.UpdateUserAsync(userInfo);
+			return _mapper.Map<UserDetailResponse>(result);
+		}
+
 
 		/// <summary>
 		/// Deletes a user identified by the specified ID.

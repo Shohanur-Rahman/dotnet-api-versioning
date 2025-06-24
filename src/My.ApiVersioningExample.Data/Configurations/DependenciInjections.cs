@@ -16,12 +16,6 @@ namespace My.ApiVersioningExample.Data.Configurations
 		/// <returns>The updated <see cref="IServiceCollection"/> instance with registered services.</returns>
 		public static IServiceCollection AddRepositoryDependency(this IServiceCollection services)
 		{
-			#region Package Dependencies
-
-			services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-
-			#endregion
-
 			#region User Defined Services
 
 			services.AddScoped<IUserRepository, UserRepository>();

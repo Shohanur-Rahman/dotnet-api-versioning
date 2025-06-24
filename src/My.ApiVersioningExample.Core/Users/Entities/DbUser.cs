@@ -11,7 +11,7 @@ namespace My.ApiVersioningExample.Core.Users.Entities
 		/// Gets or sets the unique identifier for the user.
 		/// </summary>
 		[Key]
-		public Guid Id { get; set; } = Guid.NewGuid();
+		public Guid Id { get; set; }
 
 		/// <summary>
 		/// Gets or sets the full name of the user.
@@ -26,10 +26,10 @@ namespace My.ApiVersioningExample.Core.Users.Entities
 		public string Email { get; set; } = default!;
 
 		/// <summary>
-		/// Gets or sets the user's mobile phone number (optional).
+		/// Gets or sets the user's mobile phone number.
 		/// </summary>
-		[MaxLength(20)]
-		public string? Mobile { get; set; }
+		[Required, MaxLength(20)]
+		public string? Mobile { get; set; } = default!;
 
 		/// <summary>
 		/// Gets or sets the hashed password of the user.

@@ -38,6 +38,13 @@ namespace My.ApiVersioningExample.Services.Users.Interfaces
 		Task<UserDetailResponse> UpdateUserAsync(UserUpdateRequest request);
 
 		/// <summary>
+		/// Updates the user's profile photo URL based on the provided request.
+		/// </summary>
+		/// <param name="request">The request containing the user's ID and the new photo URL.</param>
+		/// <returns>A <see cref="UserDetailResponse"/> containing the updated user details.</returns>
+		Task<UserDetailResponse> PhotoUrlUpdateAsync(PhotoUrlRequest request);
+
+		/// <summary>
 		/// Deletes a user by their unique identifier.
 		/// </summary>
 		/// <param name="id">The unique identifier of the user to delete.</param>

@@ -1,9 +1,10 @@
 ﻿
 using AutoMapper;
 using My.ApiVersioningExample.Core.Users.DTOs.Request;
+using My.ApiVersioningExample.Core.Users.DTOs.Response;
 using My.ApiVersioningExample.Core.Users.Entities;
 
-namespace My.ApiVersioningExample.Data.Configurations
+namespace My.ApiVersioningExample.Services.Configurations
 {
 	/// <summary>
 	/// AutoMapper profile for configuring object-to-object mappings related to user entities.
@@ -18,7 +19,13 @@ namespace My.ApiVersioningExample.Data.Configurations
 			#region Users Mapping
 
 			CreateMap<UserCreateRequest, DbUser>().ReverseMap();
-			CreateMap<UserUpdateRequest, DbUser>().ReverseMap();
+			CreateMap<UserUpdateRequest, DbUser>()
+				.ForMember(dest => dest.PasswordHash, opt => opt.Ignore())
+				.ForMember(dest => dest.PasswordSalt, opt => opt.Ignore())
+				.ForMember(dest => dest.PhotoUrl, opt => opt.Ignore())
+				.ReverseMap();
+			CreateMap<PhotoUrlRequest, DbUser>().ReverseMap();
+			CreateMap<UserDetailResponse, DbUser>().ReverseMap();
 
 			#endregion
 		}

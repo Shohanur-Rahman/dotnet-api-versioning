@@ -14,3 +14,4 @@
 /src/My.ApiVersioningExample.WebApi/bin/Debug/net9.0
 /src/My.ApiVersioningExample.WebApi/obj
 *.user
+/src/My.ApiVersioningExample.Data/Migrations

@@ -7,6 +7,8 @@ namespace My.ApiVersioningExample.WebApi.Configuration
 	{
 		public static WebApplication ConfigApplication(this WebApplication app)
 		{
+			app.UseStaticFiles();
+
 			// Configure the HTTP request pipeline.
 			if (app.Environment.IsDevelopment())
 			{

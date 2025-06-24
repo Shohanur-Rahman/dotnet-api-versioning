@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using My.ApiVersioningExample.Data.Repositories.Users;
-using My.ApiVersioningExample.Data.Repositories.Users.Interfaces;
+using My.ApiVersioningExample.Services.Users;
+using My.ApiVersioningExample.Services.Users.Interfaces;
 
 namespace My.ApiVersioningExample.Services.Configurations
 {
@@ -24,7 +24,7 @@ namespace My.ApiVersioningExample.Services.Configurations
 
 			#region User Defined Services
 
-			services.AddScoped<IUserRepository, UserRepository>();
+			services.AddScoped<IUserService, UserService>();
 
 			#endregion
 

@@ -13,7 +13,7 @@ namespace My.ApiVersioningExample.Core.Users.DTOs.Request
 		/// Gets or sets the password for the new user as a byte array.
 		/// </summary>
 		[Required]
-		public byte[] Password { get; set; } = default!;
+		public string Password { get; set; } = default!;
 		#endregion
 	}
 

@@ -41,6 +41,7 @@ namespace My.ApiVersioningExample.Data.DB
 			this.modelBuilder.Entity<DbUser>().HasData(
 				new DbUser
 				{
+					Id= Guid.NewGuid(),
 					Name = "John Doe",
 					Email = "john@gmail.com",
 					Mobile = "+9108765412",
@@ -50,6 +51,7 @@ namespace My.ApiVersioningExample.Data.DB
 				},
 				new DbUser
 				{
+					Id= Guid.NewGuid(),
 					Name = "Alex Hels",
 					Email = "alex@gmail.com",
 					Mobile = "+9108765411",

@@ -12,7 +12,7 @@ namespace My.ApiVersioningExample.Core.Users.Entities
 		/// Gets or sets the unique identifier for the address entry.
 		/// </summary>
 		[Key]
-		public Guid Id { get; set; } = Guid.NewGuid();
+		public Guid Id { get; set; }
 
 		/// <summary>
 		/// Gets or sets the title or label for the address (e.g., "Home", "Office").
