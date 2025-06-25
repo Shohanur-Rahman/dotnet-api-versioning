@@ -1,11 +1,11 @@
 ﻿using Asp.Versioning;
 using Microsoft.AspNetCore.Mvc;
 using My.ApiVersioningExample.Common.Responses;
-using My.ApiVersioningExample.Core.Security.Request;
-using My.ApiVersioningExample.Services.Security.Interfaces;
+using My.ApiVersioningExample.Core.Security.V2;
+using My.ApiVersioningExample.Services.Security.V2.Interfaces;
 using My.ApiVersioningExample.WebApi.Utilities;
 
-namespace My.ApiVersioningExample.WebApi.Controllers.Security
+namespace My.ApiVersioningExample.WebApi.Controllers.V2.Security
 {
 	/// <summary>
 	/// API controller responsible for handling authentication-related HTTP requests,
@@ -14,7 +14,7 @@ namespace My.ApiVersioningExample.WebApi.Controllers.Security
 	/// <remarks>
 	/// Routes are prefixed with 'api/[controller]', which resolves to 'api/auth' by convention.
 	/// </remarks>
-	[ApiVersion("1.0")]
+	[ApiVersion("2.0")]
 	[Route("api/v{version:apiVersion}/[controller]")]
 	[ApiController]
 	public class AuthController : ControllerBase
@@ -91,55 +91,7 @@ namespace My.ApiVersioningExample.WebApi.Controllers.Security
 				return StatusCode(StatusCodes.Status500InternalServerError, ApiResponse<string>.Fail(ex.Message));
 			}
 		}
-
-
-		/// <summary>
-		/// Authenticates a user by verifying their email and password, and returns a JWT token upon successful sign-in.
-		/// </summary>
-		/// <param name="request">The <see cref="SignInRequest"/> containing the user's email and password.</param>
-		/// <returns>
-		/// An <see cref="ActionResult{ApiResponse{string}}"/> containing a JWT token if sign-in is successful,
-		/// or an appropriate error response if validation fails or an exception occurs.
-		/// </returns>
-		/// <response code="200">Returns a JWT token when the user is successfully signed in.</response>
-		/// <response code="400">Returns validation error messages if the request is invalid.</response>
-		/// <response code="500">Returns a server error if an unexpected exception occurs during sign-in.</response>
-		[EndpointSummary("Signin user")]
-		[EndpointDescription("Authenticates a user by verifying their email and password, and returns a JWT token upon successful sign-in.")]
-		[Route("SignIn")]
-		[HttpPost]
-		[ProducesResponseType(typeof(ApiResponse<string>), StatusCodes.Status200OK)]
-		[ProducesResponseType(typeof(ApiResponse<string>), StatusCodes.Status500InternalServerError)]
-		[ProducesResponseType(typeof(ApiResponse<string>), StatusCodes.Status400BadRequest)]
-		public async Task<ActionResult<ApiResponse<string>>> SignInUserAsync(SignInRequest request)
-		{
-			try
-			{
-				if (request is null)
-					return BadRequest($"Signup request cannot be null {nameof(request)}");
-
-				if (string.IsNullOrEmpty(request.Email))
-					return BadRequest($"Email cannot be empty to identify user.");
-
-				if (string.IsNullOrEmpty(request.Password))
-					return BadRequest($"Password cannot be empty to identify user.");
-
-				var result = await _authService.SignInUserAsync(request);
-
-				if (result is null)
-					return BadRequest(ApiResponse<string>.Fail($"User signin failed with provided values"));
-
-				return Ok(ApiResponse<string>.Ok(JWTHelper.GenerateJwtToken(result, _configuration), "User signedin"));
-			}
-			catch (Exception ex)
-			{
-				_logger.LogError(ex, ex.Message);
-				return StatusCode(StatusCodes.Status500InternalServerError, ApiResponse<string>.Fail(ex.Message));
-			}
-		}
 		#endregion
 
-
 	}
-
 }

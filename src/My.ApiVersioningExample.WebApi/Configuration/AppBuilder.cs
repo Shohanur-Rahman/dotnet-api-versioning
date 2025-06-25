@@ -13,7 +13,12 @@ namespace My.ApiVersioningExample.WebApi.Configuration
 			if (app.Environment.IsDevelopment())
 			{
 				app.MapOpenApi();
-				app.MapScalarApiReference();
+				app.MapScalarApiReference(options =>
+				{
+					options
+					.WithTheme(ScalarTheme.Kepler)
+					.WithDefaultHttpClient(ScalarTarget.CSharp, ScalarClient.HttpClient);
+				});
 			}
 
 			app.UseHttpsRedirection();

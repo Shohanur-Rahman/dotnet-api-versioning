@@ -1,11 +1,12 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Asp.Versioning;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using My.ApiVersioningExample.Common.Enums.File;
 using My.ApiVersioningExample.Common.Responses;
 using My.ApiVersioningExample.Core.Users.DTOs.Request;
 using My.ApiVersioningExample.Core.Users.DTOs.Response;
 using My.ApiVersioningExample.Services.Users.Interfaces;
-using My.ApiVersioningExample.WebApi.Urilities;
+using My.ApiVersioningExample.WebApi.Utilities;
 
 namespace My.ApiVersioningExample.WebApi.Controllers.Users
 {
@@ -16,7 +17,8 @@ namespace My.ApiVersioningExample.WebApi.Controllers.Users
 	/// <remarks>
 	/// This controller is protected by authorization and is routed using the controller name (e.g., 'users').
 	/// </remarks>
-	[Route("api/[controller]")]
+	[ApiVersion("1.0")]
+	[Route("api/v{version:apiVersion}/[controller]")]
 	[ApiController]
 	[Authorize]
 	public class UsersController : ControllerBase

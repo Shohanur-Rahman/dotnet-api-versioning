@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.StaticFiles;
 using My.ApiVersioningExample.Common.Responses;
 
-namespace My.ApiVersioningExample.WebApi.Urilities
+namespace My.ApiVersioningExample.WebApi.Utilities
 {
 	public class FileUploadService
 	{

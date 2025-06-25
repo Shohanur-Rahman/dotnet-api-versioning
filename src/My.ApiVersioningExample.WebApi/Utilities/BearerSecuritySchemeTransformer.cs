@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.OpenApi;
 using Microsoft.OpenApi.Models;
 
-namespace My.ApiVersioningExample.WebApi.Urilities
+namespace My.ApiVersioningExample.WebApi.Utilities
 {
 	internal sealed class BearerSecuritySchemeTransformer(IAuthenticationSchemeProvider authenticationSchemeProvider) : IOpenApiDocumentTransformer
 	{
